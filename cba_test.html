@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>W3.CSS</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">-->
+
+	<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">-->
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="bootstrap/css/bootstrap-reboot.min.css" />
+	<link rel="stylesheet" href="bootstrap/css/bootstrap-grid.min.css" />
+	<!--my costom css-->
+	<link rel="stylesheet" href="custom/css/mycustom.css" />
+	<!--end of custom css-->
+	<!--my costom JS-->
+	<!--end of custom css-->
+	<noscript>
+<link rel="stylesheet" href="assets/css/noscript.css" />
+</noscript>
+	<!--------->
+
+
+	<!-- assets js files-->
+	<script src="assets/js/jquery.min.js"></script>
+	<!---bootstrap js files--->
+	<script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="bootstrap/js/bootstrap.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="asset/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+</head>
+
+
+
+
+<body style="background-color: #343434 ;">
+
+	<h2 class=""><span style="background-color:#FFD700;">COLOR BLINDNESS TEST</span></h2>
+	<div class="img-fluid">
+		<img class="mySlides size1" src="images/d1.png">
+		<img class="mySlides size1" src="images/d5.png">
+		<img class="mySlides size1" src="images/d9.png">
+		<img class="mySlides size1" src="images/d3.png">
+		<img class="mySlides size1" src="images/d7.png">
+		<img class="mySlides size1" src="images/d91.png">
+		<img class="mySlides size1" src="images/d2.png">
+		<img class="mySlides size1" src="images/d6.png">
+		<img class="mySlides size1" src="images/d21.png">
+		<img class="mySlides size1" src="images/d4.png">
+		<img class="mySlides size1" src="images/d8.png">
+		<img class="mySlides size1" src="images/d11.png">
+		<img class="mySlides size1" src="images/d71.png">
+		<img class="mySlides size1" src="images/thankyou.gif">
+	</div>
+	<div class="container row ">
+		<div class="col-sm-2 text-center">
+			<label style="color:#FFD700" id="ilabel"><strong>Enter Value Present In Image :</strong></label>
+		</div>
+		<div class="col-md-1 ">
+			<input type="number" id="ival" class="form-control">
+		</div>
+		<div class="col-md-4">
+			<button class="btn btn-outline-warning myButton" style="" onclick="plusDivs(1);">NEXT
+				<span class="mySymbol pull-left">&#x2714;</span><!---->
+				<span class="mySymbol pull-left">&#x2716;</span> <!---->
+				<span class="mySymbol pull-left">&#10095;</span><!---->
+			</button>
+		</div>
+	</div>
+	<div class="container row ">
+		<div class="col-md-2 offset-md-1">
+			<button class="btn btn-outline-warning btn-lg myButton" style="" onclick="end();">FINISH</button>
+			<h4 id="finalscore_text" style="color:#FFD700" class="text-left">Final Score:</h4>
+		</div>
+		<div class="col-md-2 text-left">
+
+			<h3 style="color:#FFD700"><span id="score_text" class="pull-left">Score:&#160;</span><span id="final_score" class="pull-left">0</span><span id="score" class="pull-left">0</span><span id="total_score" class="pull-left">/13</span></h3>
+			<!--<h3 id="total_score"  style="color:#FFD700" class="text-left"></h3>-->
+		</div>
+	</div>
+
+
+
+
+	<!--custom script to run game written by @monksmojo-->
+	<script>
+		// global variable declaration
+		var slideIndex = 1;
+		var check = 0;
+		var score = 0;
+		var imgvalue = [1, 5, 9, 3, 7, 9, 2, 6, 2, 4, 8, 1, 7];
+		var il = document.getElementsByClassName("mySlides");
+		var bl = document.getElementsByClassName("myButton");
+		var sl = document.getElementsByClassName("mySymbol");
+		console.log("image length" + il)
+		showDivs(slideIndex);
+
+		function plusDivs(n) {
+			showDivs(slideIndex += n);
+			scorecalculate();
+			ClearFields();
+		}
+
+		function showDivs(n) {
+			var i;
+
+			for (i = 0; i < il.length; i++) {
+				il[i].style.display = "none";
+				document.getElementById("finalscore_text").style.display = "none";
+				document.getElementById("final_score").style.display = "none";
+				document.getElementById("total_score").style.display = "none";
+			} //for hiding images of sameclass
+			for (i = 0; i < bl.length; i++) {
+				bl[i].style.display = "none";
+			} //for hiding buttons of sameclass
+			for (i = 0; i < sl.length; i++) {
+				sl[i].style.display = "none";
+			} //for hidding unicode symbols
+			if (n >= il.length) {
+				n = il.length; //to important dont know why
+				il[n - 1].style.display = "block";
+				bl[1].style.display = "block";
+				document.getElementById("ilabel").style.display = "none";
+				document.getElementById("ival").style.display = "none";
+				document.getElementById("score_text").style.display = "none";
+				document.getElementById("score").style.display = "none";
+			}
+
+			if (n < il.length) {
+				il[n - 1].style.display = "block";
+				bl[0].style.display = "block";
+				console.log("image no." + (n - 1))
+			}
+			sl[2].style.display = "block";
+		} //end of function showDivs()
+
+		function scorecalculate() {
+			/*if (check >= imgvalue.length - 1) { //use this in case you want to repeat slide show
+				//score = 0;
+				//check = 0;
+				//document.getElementById("score").innerHTML = 0;
+			}*/
+			var ival = document.getElementById("ival").value;
+			if (ival == imgvalue[check]) {
+				document.getElementById("score").innerHTML = ++score;
+				sl[0].style.display = "block";
+				setTimeout(revoke, 1000);
+			}
+
+			if (ival != imgvalue[check]) {
+				sl[1].style.display = "block";
+				setTimeout(revoke, 1000);
+			}
+			++check;
+			console.log("check value" + check + "score" + score)
+		}
+
+		function ClearFields() {
+
+			document.getElementById("ival").value = "";
+		}
+
+		function end() {
+			bl[1].style.display = "none";
+			document.getElementById("final_score").innerHTML = score;
+			document.getElementById("finalscore_text").style.display = "block";
+			document.getElementById("final_score").style.display = "block";
+			document.getElementById("total_score").style.display = "block";
+
+		}
+
+		function revoke() {
+			sl[0].style.display = "none";
+			sl[1].style.display = "none";
+		}
+	</script>
+
+</body>
+
+</html>

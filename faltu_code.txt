@@ -1,0 +1,13 @@
+function empty() {
+  var x;
+  x = document.getElementById("ival").value;
+  if (x == "") {
+    console.log("slideIndex value:" + slideIndex);
+    console.log("x.length value:" + il.length);
+    if (slideIndex <= il.length) {
+      alert("please enter a value");
+      return false;
+    }
+  } else {}
+
+}
